@@ -1,0 +1,8 @@
+.layout__area--topleft {
+  background-color: #FFF;
+  padding-top: 20px;
+}
+
+.layout__area--left {
+  top: 59px !important;
+}

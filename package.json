@@ -1,0 +1,18 @@
+{
+  "name": "TradingView-Desktop",
+  "version": "0.0.1",
+  "main": "./main.js",
+  "scripts": {
+    "start": "NODE_ENV='development' electron .",
+    "package": "electron-packager . --overwrite --asar --out ./build/ --app-bundle-id='com.thefullsnack.tradingview' --osx-sign --icon=./app/img/icon.icns --app-version=$npm_package_version && cd build/TradingView-Desktop-darwin-x64 && zip -ryXq9 ../TradingView-Desktop-osx-${npm_package_version}.zip TradingView-Desktop.app"
+  },
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-packager": "^8.5.1"
+  },
+  "dependencies": {
+    "electron-lets-move": "0.0.5",
+    "electron-spellchecker": "^1.0.4",
+    "electron-window-state": "^4.0.2"
+  }
+}
