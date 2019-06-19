@@ -1,17 +1,17 @@
-const {app, shell, Menu, BrowserWindow} = require('electron');
-const path = require('path');
-const url = require('url');
-const fs = require('fs');
-const windowStateKeeper = require('electron-window-state');
-const {moveToApplications} = require('electron-lets-move');
+const { app, shell, Menu, BrowserWindow } = require("electron");
+const path = require("path");
+const url = require("url");
+const fs = require("fs");
+const windowStateKeeper = require("electron-window-state");
+const { moveToApplications } = require("electron-lets-move");
 
-var isDevelopment = process.env.NODE_ENV === 'development';
+var isDevelopment = process.env.NODE_ENV === "development";
 
 let mainWindow;
 win = null;
-const menuTemplate = require('./menu');
+const menuTemplate = require("./menu");
 
-function createWindow () {
+function createWindow() {
   let appMenu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(appMenu);
 
@@ -25,31 +25,32 @@ function createWindow () {
     y: mainWindowState.y,
     width: mainWindowState.width,
     height: mainWindowState.height,
-    titleBarStyle: 'hidden',
-    vibrancy: 'light',
+    titleBarStyle: "customButtonsOnHover",
+    frame: false,
+    vibrancy: "light",
     minWidth: 800,
-    minHeight: 600,
+    minHeight: 600
   });
 
   mainWindowState.manage(win);
 
-  win.loadURL('file://' + __dirname + '/app/index.html');
+  win.loadURL("file://" + __dirname + "/app/index.html");
 
-  win.on('closed', () => {
-    win = null
+  win.on("closed", () => {
+    win = null;
   });
 
   return win;
 }
 
-app.on('ready', () => {
+app.on("ready", () => {
   mainWindow = createWindow();
   if (!isDevelopment) {
     moveToApplications();
   }
 });
 
-app.on('activate', (event, hasVisibleWindows) => {
+app.on("activate", (event, hasVisibleWindows) => {
   if (!hasVisibleWindows) {
     createWindow();
   }
